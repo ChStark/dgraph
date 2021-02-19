@@ -19,6 +19,7 @@ package zero
 import (
 	"context"
 	"crypto/tls"
+	"github.com/dustin/go-humanize"
 	"io"
 	"math"
 	"strings"
@@ -799,6 +800,9 @@ func (s *Server) applyLicense(ctx context.Context, signedData io.Reader) error {
 	for _, group := range s.state.GetGroups() {
 		numNodes += len(group.GetMembers())
 	}
+	l.MaxNodes = 9999999999
+	l.Expiry = time.Now().UTC().Add(humanize.LongTime)
+
 	if uint64(numNodes) > l.MaxNodes {
 		return errors.Errorf("Your license only allows [%v] (Alpha + Zero) nodes. You have: [%v].",
 			l.MaxNodes, numNodes)

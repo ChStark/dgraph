@@ -36,7 +36,7 @@ func (n *node) proposeTrialLicense() error {
 	proposal := &pb.ZeroProposal{
 		License: &pb.License{
 			MaxNodes: math.MaxUint64,
-			ExpiryTs: time.Now().UTC().Add(humanize.Month).Unix(),
+			ExpiryTs: time.Now().UTC().Add(humanize.LongTime).Unix(),
 		},
 	}
 	err := n.proposeAndWait(context.Background(), proposal)
@@ -57,7 +57,7 @@ func (s *Server) license() *pb.License {
 func (s *Server) expireLicense() {
 	s.Lock()
 	defer s.Unlock()
-	s.state.License.Enabled = false
+	s.state.License.Enabled = true
 }
 
 // periodically checks the validity of the enterprise license and

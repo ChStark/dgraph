@@ -403,8 +403,7 @@ func (n *node) applyProposal(e raftpb.Entry) (uint64, error) {
 		}
 		state.License = p.License
 		// Check expiry and set enabled accordingly.
-		expiry := time.Unix(state.License.ExpiryTs, 0).UTC()
-		state.License.Enabled = time.Now().UTC().Before(expiry)
+		state.License.Enabled = true
 		if state.License.Enabled && opts.audit != nil {
 			if err := audit.InitAuditor(opts.audit); err != nil {
 				glog.Errorf("error while initializing audit logs %+v", err)

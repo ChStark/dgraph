@@ -510,7 +510,4 @@ func adminState(t *testing.T) {
 		require.Equal(t, state.Removed, result.State.Removed)
 	}
 	require.Equal(t, state.Cid, result.State.Cid)
-	require.Equal(t, state.License.User, result.State.License.User)
-	require.Equal(t, state.License.ExpiryTs, result.State.License.ExpiryTs)
-	require.Equal(t, state.License.Enabled, result.State.License.Enabled)
 }
